@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100;
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16;
+  }
+
+  .heading {
+    @apply text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent via-blue-600 to-indigo-600 mb-8;
+  }
+
+  .subheading {
+    @apply text-xl text-gray-600 dark:text-gray-400 mb-6;
+  }
+
+  .nav-link {
+    @apply text-gray-600 hover:text-accent dark:text-gray-300 dark:hover:text-accent transition-colors;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-accent to-blue-600 hover:from-blue-600 hover:to-accent text-white rounded-lg transition-all shadow-lg hover:shadow-xl;
+  }
+
+  .bg-grid-pattern {
+    background-image: linear-gradient(
+        to right,
+        rgba(49, 130, 206, 0.05) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgba(49, 130, 206, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
+  /* Horizontal Scroll Styles */
+  .project-card {
+    scroll-snap-align: start;
+  }
+
+  .project-card::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Glassmorphism Effects */
+  .glass-card {
+    @apply bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg border border-white/20 dark:border-gray-700/20;
+  }
+
+  .glass-effect {
+    @apply backdrop-blur-sm bg-opacity-20 dark:bg-opacity-20;
+  }
+
+  /* GSAP Animation Classes */
+  .feature-card {
+    @apply relative overflow-hidden;
+    transform-origin: center;
+  }
+
+  .feature-card::after {
+    content: "";
+    @apply absolute inset-0 bg-accent/5 opacity-0 transition-opacity;
+  }
+
+  .feature-card:hover::after {
+    @apply opacity-100;
+  }
+
+  .tech-tag {
+    transform-origin: center;
+    @apply hover:scale-110 transition-transform;
+  }
+
+  /* Achievement Card Hover Effects */
+  .achievement-item {
+    @apply relative overflow-hidden;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .achievement-item:hover {
+    transform: translateY(-2px) scale(1.01);
+  }
+
+  .achievement-item::before {
+    content: "";
+    @apply absolute inset-0 bg-gradient-to-r from-accent/10 to-transparent opacity-0 transition-opacity;
+  }
+
+  .achievement-item:hover::before {
+    @apply opacity-100;
+  }
+
+  /* Gradient Text Animation */
+  .gradient-text {
+    @apply text-transparent bg-clip-text;
+    background-image: linear-gradient(
+      90deg,
+      theme('colors.accent') 0%,
+      theme('colors.blue.600') 50%,
+      theme('colors.indigo.600') 100%
+    );
+    background-size: 200% auto;
+    animation: gradientMove 8s linear infinite;
+  }
+
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Custom Animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* Scroll Progress Bar */
+  .scroll-progress {
+    @apply fixed top-0 left-0 h-1 bg-gradient-to-r from-accent via-blue-600 to-indigo-600 z-50;
+    width: var(--scroll-width, 0%);
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100 dark:bg-gray-800;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gradient-to-b from-accent to-blue-600 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply from-blue-600 to-accent;
+  }
+
+  /* Project Card Transitions */
+  .project-card {
+    transition: transform 0.3s ease-out;
+  }
+
+  .project-card:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Blur Effect on Hover */
+  .hover-blur {
+    @apply transition-all duration-300;
+  }
+
+  .hover-blur:hover {
+    filter: blur(0);
+  }
+
+  .hover-blur:not(:hover) {
+    filter: blur(2px);
+  }
+
+  /* Modern Button Style */
+  .modern-button {
+    @apply relative overflow-hidden transition-all duration-300;
+  }
+
+  .modern-button::after {
+    content: '';
+    @apply absolute inset-0 bg-white opacity-0 transition-opacity duration-300;
+  }
+
+  .modern-button:hover::after {
+    @apply opacity-20;
+  }
+}
+
+/* Dark Mode Transitions */
+.dark {
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Smooth transitions for all color changes */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
